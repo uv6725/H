@@ -101,7 +101,7 @@ def create_server():
             # Scrape properties using homeharvest
             properties_data = scrape_property(
                 location=location,
-                listing_type=listing_type,
+                listing_type=listing_type.value,
                 property_type=property_type,
                 past_days=past_days,
                 radius=radius,
