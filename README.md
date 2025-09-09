@@ -2,6 +2,8 @@
 
 An MCP server built with Smithery.
 
+[**Remote MCP Server Setup** @ smithery.ai](https://smithery.ai/server/@ZacharyHampton/homeharvest-mcp)
+
 ## Prerequisites
 
 - **Smithery API key**: Get yours at [smithery.ai/account/api-keys](https://smithery.ai/account/api-keys)
