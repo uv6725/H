@@ -16,7 +16,7 @@ from datetime import datetime
 import json
 
 from smithery.decorators import smithery
-from homeharvest import scrape_property, ListingType, SearchPropertyType, ReturnType
+from homeharvest import scrape_property, ListingType, SearchPropertyType
 
 
 class ConfigSchema(BaseModel):
@@ -113,7 +113,7 @@ def create_server():
                 extra_property_data=extra_property_data,
                 exclude_pending=exclude_pending,
                 proxy=session_config.proxy_url if hasattr(session_config, 'proxy_url') else None,
-                return_type=ReturnType.RAW
+                return_type="raw"
             )
             
             # Handle empty results
