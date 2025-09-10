@@ -76,7 +76,7 @@ def create_server():
         )] = False,
         ctx: Context = None
     ) -> str:
-        """Scrape real estate properties from Realtor.com using HomeHarvest.
+        """Scrape real estate properties using HomeHarvest.
         
         This tool provides comprehensive real estate data scraping with flexible
         filtering options for location, property type, date ranges, and more.
@@ -102,7 +102,7 @@ def create_server():
             properties_data = scrape_property(
                 location=location,
                 listing_type=listing_type.value,
-                property_type=property_type,
+                property_type=[value.value for value in property_type] if property_type else None,
                 past_days=past_days,
                 radius=radius,
                 limit=limit,
@@ -117,7 +117,7 @@ def create_server():
             )
             
             # Handle empty results
-            if not properties_data or len(properties_data) == 0:
+            if properties_data.empty or len(properties_data) == 0:
                 return "No properties found matching the specified criteria."
             
             return json.dumps(properties_data, default=str)
