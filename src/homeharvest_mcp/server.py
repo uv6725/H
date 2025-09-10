@@ -34,10 +34,10 @@ def create_server():
     def scrape_properties(
         location: Annotated[str, Field(description="Location to search (ZIP code, city, address, neighborhood, county, etc.)")],
         listing_type: Annotated[ListingType, Field(description="Type of listing: FOR_SALE, FOR_RENT, SOLD, or PENDING")],
-        # property_type: Annotated[Optional[List[SearchPropertyType]], Field(
-        #     default=None,
-        #     description="Filter by property types: single_family, apartment, condos, condo_townhome_rowhome_coop, condo_townhome, townhomes, duplex_triplex, farm, land, multi_family, mobile"
-        # )] = None,
+        property_type: Annotated[Optional[List[SearchPropertyType]], Field(
+            default=None,
+            description="Filter by property types: single_family, multi_family, condos, condo_townhome_rowhome_coop, condo_townhome, townhomes, duplex_triplex, farm, land, mobile"
+        )] = None,
         past_days: Annotated[Optional[int], Field(
             default=None, 
             description="Filter properties listed/sold within the last N days"
@@ -102,7 +102,7 @@ def create_server():
             properties_data = scrape_property(
                 location=location,
                 listing_type=listing_type.value,
-                #: property_type=[value.value for value in property_type] if property_type else None,
+                property_type=[property_type_value.value for property_type_value in property_type] if property_type else None,
                 past_days=past_days,
                 radius=radius,
                 limit=limit,
@@ -117,7 +117,7 @@ def create_server():
             )
             
             # Handle empty results
-            if properties_data.empty or len(properties_data) == 0:
+            if not properties_data:
                 return "No properties found matching the specified criteria."
             
             return json.dumps(properties_data, default=str)
