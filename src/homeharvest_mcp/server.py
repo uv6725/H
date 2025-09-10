@@ -47,9 +47,9 @@ def create_server():
             description="Search radius in miles around the specified location"
         )] = None,
         limit: Annotated[Optional[int], Field(
-            default=None,
-            description="Maximum number of properties to return (max 10,000)"
-        )] = None,
+            default=5,
+            description="Maximum number of properties to return (max 10,000, default 5)"
+        )] = 5,
         date_from: Annotated[Optional[str], Field(
             default=None,
             description="Start date for listing search in YYYY-MM-DD format"
