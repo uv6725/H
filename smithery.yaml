@@ -1,1 +1,3 @@
 runtime: python
+entrypoint: uv run dev
+port: 8000
